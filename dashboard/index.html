@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Trend Forecasting | PM Accelerator Technical Assessment</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-badge">PMA</div>
+      <div class="brand-text">PM Accelerator Analytics</div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#eda">EDA</a></li>
+        <li><a href="#anomalies">Anomalies</a></li>
+        <li><a href="#models">Models & Ensemble</a></li>
+        <li><a href="#advanced">Unique Analyses</a></li>
+        <li><a href="#insights">Insights</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <!-- Hero Section -->
+    <div class="hero" id="overview">
+      <h1>Global Weather Trend Forecasting</h1>
+      <p>Advanced Data Science, Unsupervised Anomaly Detection, Multi-Model Time-Series Forecasting & Climate Intelligence</p>
+    </div>
+
+    <!-- PM Accelerator Mission Card -->
+    <div class="mission-card">
+      <div class="mission-title">
+        <span>🚀</span> Product Manager Accelerator (PMA) Mission
+      </div>
+      <div class="mission-quote">
+        "The Product Manager Accelerator (PMA), founded by Dr. Nancy Li, is on a mission to help ambitious professionals uncover their potential, gain the confidence to land product manager and AI product manager roles at leading tech companies and startup unicorns, and accelerate their career growth through world-class coaching, training, and community."
+      </div>
+      <div class="mission-kids">
+        <strong>PMA Kids Philanthropic Initiative:</strong> Spark curiosity, build foundational skills, and foster a passion for technology and AI in the next generation by providing free AI bootcamp training to teenagers from underserved communities.
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val">98,604</div>
+        <div class="stat-label">Daily Observations</div>
+        <div class="stat-sub">507 Consecutive Days</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">211</div>
+        <div class="stat-label">Countries Covered</div>
+        <div class="stat-sub">254 Capital Cities</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">75</div>
+        <div class="stat-label">Engineered Features</div>
+        <div class="stat-sub">Lags, Rolling & Cyclical</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">2.067°C</div>
+        <div class="stat-label">Ensemble RMSE</div>
+        <div class="stat-sub">Lowest Error Benchmark</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">0.9137</div>
+        <div class="stat-label">Coefficient of Det. (R²)</div>
+        <div class="stat-sub">+2.5% over Persistence</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: PREPROCESSING -->
+    <section class="section" id="preprocessing">
+      <div class="section-header">
+        <span class="section-tag">Step 1: Data Engineering</span>
+        <h2 class="section-title">Data Cleaning & Preprocessing Pipeline</h2>
+        <p class="section-desc">Transforming 98,604 raw weather records into a rigorous, leak-free time-series forecasting dataset.</p>
+      </div>
+
+      <div class="callout">
+        <strong>Data Cleaning & Feature Engineering Summary:</strong>
+        <ul style="margin-top: 8px; margin-left: 20px;">
+          <li><strong>Text Standardization:</strong> Fixed mixed casings (e.g. <code>Partly cloudy</code> vs <code>Partly Cloudy</code>) and normalized location names.</li>
+          <li><strong>Sensor Error Correction:</strong> Identified unphysical negative readings in air quality metrics (PM10 down to -1848.15 µg/m³); applied group-level temporal interpolation and physical bounds clipping.</li>
+          <li><strong>Chronological Feature Engineering:</strong> Computed 1-day, 2-day, 3-day, and 7-day lags, 3-day and 7-day rolling means/stds/min/max, and day-over-day temperature momentum.</li>
+          <li><strong>Temporal & Cyclical Encodings:</strong> Extracted sine/cosine transforms for hour, month, and day-of-year to capture cyclical diurnal and seasonal solar variations.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 2: EXPLORATORY DATA ANALYSIS -->
+    <section class="section" id="eda">
+      <div class="section-header">
+        <span class="section-tag">Step 2: Exploratory Analysis</span>
+        <h2 class="section-title">Global Meteorological Distributions & Patterns</h2>
+        <p class="section-desc">Uncovering trends, correlations, and macro patterns across 41 atmospheric dimensions.</p>
+      </div>
+
+      <div class="visual-grid">
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/eda_temp_distribution.png" alt="Temperature Distribution">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Temperature Distribution & Seasonal Variations</h3>
+            <p class="card-text">Global temperatures exhibit a bimodal distribution with a mean of 22.8°C and median of 24.9°C. Seasonal boxplots highlight stark shifts between Summer (median ~28°C) and Winter (median ~15°C).</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/eda_precip_distribution.png" alt="Precipitation Distribution">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Global Precipitation & Intensity Distribution</h3>
+            <p class="card-text">Over 70% of days recorded dry conditions (≤0.1 mm). For days with active precipitation, rainfall intensity follows a log-normal distribution with extreme flash precipitation events exceeding 40 mm.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/eda_weather_correlation_matrix.png" alt="Correlation Matrix">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Meteorological & Atmospheric Correlation Matrix</h3>
+            <p class="card-text">Strong positive correlation between Temperature and UV Index (r = 0.54) and Ozone (r = 0.42). Strong negative correlation between Temperature and Relative Humidity (r = -0.48), confirming thermodynamic evaporation dynamics.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/eda_temporal_temperature_trend.png" alt="Temporal Trends">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Global Daily Mean Temperature Timeline (500+ Days)</h3>
+            <p class="card-text">Tracking global mean temperatures and 7-day/30-day moving averages from May 2024 through October 2025. Demonstrates northern-hemisphere dominated summer peaks and winter troughs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ANOMALY DETECTION -->
+    <section class="section" id="anomalies">
+      <div class="section-header">
+        <span class="section-tag">Step 3: Advanced EDA</span>
+        <h2 class="section-title">Multivariate Anomaly Detection & Outlier Analysis</h2>
+        <p class="section-desc">Detecting atmospheric anomalies using unsupervised Isolation Forest and domain-specific meteorological extreme thresholds.</p>
+      </div>
+
+      <div class="visual-grid">
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/anomaly_isolation_forest_scatter.png" alt="Isolation Forest Anomalies">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Isolation Forest Multivariate Clusters</h3>
+            <p class="card-text">The Isolation Forest model (contamination = 2.0%) successfully isolated 1,973 multivariate anomalies combining unusual pairings, such as high-temperature low-humidity dust storms and severe freezing fog.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/anomaly_timeline.png" alt="Anomaly Timeline">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Frequency of Global Anomalies Timeline</h3>
+            <p class="card-text">Temporal tracking of anomalous weather days indicates severe spikes during mid-summer heatwaves (July/August) and extreme winter vortex events (January/February).</p>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1;">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/anomaly_top_locations.png" alt="Top Anomaly Locations">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Top Global Cities with Most Weather Anomalies</h3>
+            <p class="card-text">Locations subject to extreme continental climates (e.g. Ulaanbaatar, Yakutsk, Riyadh, Kuwait City) registered the highest concentration of severe weather departures.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: FORECASTING BENCHMARK & ENSEMBLE -->
+    <section class="section" id="models">
+      <div class="section-header">
+        <span class="section-tag">Step 4: Predictive Modeling</span>
+        <h2 class="section-title">Multi-Model Forecasting Benchmark & Meta-Ensemble</h2>
+        <p class="section-desc">Backtested strictly on 19,883 out-of-sample future records (chronological split) across all 254 cities.</p>
+      </div>
+
+      <!-- Benchmark Table -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Model Name</th>
+              <th>MAE (°C)</th>
+              <th>RMSE (°C)</th>
+              <th>R² Score</th>
+              <th>MAPE (%)</th>
+              <th>Max Error (°C)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td><strong>Meta-Blend Ensemble</strong> <span class="badge-best">Champion</span></td>
+              <td>1.4853</td>
+              <td>2.0669</td>
+              <td>0.9137</td>
+              <td>7.79%</td>
+              <td>14.5249</td>
+              <td>Optimal Stacking</td>
+            </tr>
+            <tr>
+              <td>Gradient Boosting Regressor</td>
+              <td>1.4869</td>
+              <td>2.0702</td>
+              <td>0.9134</td>
+              <td>7.83%</td>
+              <td>14.3330</td>
+              <td>Single Best ML Model</td>
+            </tr>
+            <tr>
+              <td>Random Forest Regressor</td>
+              <td>1.5206</td>
+              <td>2.1255</td>
+              <td>0.9087</td>
+              <td>8.07%</td>
+              <td>15.9344</td>
+              <td>100 Trees (Depth 16)</td>
+            </tr>
+            <tr>
+              <td>Ridge Regression</td>
+              <td>1.5343</td>
+              <td>2.1452</td>
+              <td>0.9070</td>
+              <td>8.07%</td>
+              <td>17.2420</td>
+              <td>L2 Regularized Linear</td>
+            </tr>
+            <tr>
+              <td>Deep Learning (PyTorch MLP)</td>
+              <td>1.5903</td>
+              <td>2.1663</td>
+              <td>0.9052</td>
+              <td>8.13%</td>
+              <td>15.5254</td>
+              <td>Deep Tabular Neural Net</td>
+            </tr>
+            <tr>
+              <td>Persistence Baseline (Lag-1)</td>
+              <td>1.6408</td>
+              <td>2.3443</td>
+              <td>0.8890</td>
+              <td>8.41%</td>
+              <td>18.8000</td>
+              <td>Naïve Benchmark</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" style="margin-top: 1.5rem;">
+        <strong>Meta-Ensemble Optimal Blending Weights:</strong><br>
+        <code>Gradient Boosting: 77.96%</code> | 
+        <code>PyTorch Deep Learning: 12.24%</code> | 
+        <code>Random Forest: 9.80%</code> | 
+        <code>Ridge: 0.00%</code><br>
+        <em>The meta-learner automatically allocated highest weight to the gradient boosted decision trees while leveraging the neural network and random forest for variance reduction!</em>
+      </div>
+
+      <div class="visual-grid" style="margin-top: 2rem;">
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/model_metrics_comparison.png" alt="Model Comparison">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Comparative Performance Across Metrics (MAE, RMSE, R²)</h3>
+            <p class="card-text">Every progressive model improves upon the persistence baseline, culminating in the Meta-Ensemble achieving an impressive R² of 0.9137 and RMSE of 2.067°C.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/model_residuals_distribution.png" alt="Residuals Distribution">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Forecast Residual Distributions (Actual - Predicted)</h3>
+            <p class="card-text">Residual distributions for all models are centered tightly at 0.0°C with near-zero skewness, verifying an unbiased forecasting pipeline.</p>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1;">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/model_actual_vs_pred_ensemble_forecaster_(meta-blend).png" alt="Actual vs Predicted Timeline">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Actual vs Forecast Timeline Overlay (Ensemble Model)</h3>
+            <p class="card-text">Demonstrates accurate tracking of rapid weather fluctuations across hundreds of consecutive days with tight confidence bounds.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: UNIQUE ADVANCED ANALYSES -->
+    <section class="section" id="advanced">
+      <div class="section-header">
+        <span class="section-tag">Step 5: Unique In-Depth Analyses</span>
+        <h2 class="section-title">5 Unique Advanced Analytical Dimensions</h2>
+        <p class="section-desc">Delivering deep domain insights across Climate, Environmental, Feature Importance, Spatial, and Continental domains.</p>
+      </div>
+
+      <div class="visual-grid">
+        <!-- 1. Climate Analysis -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/climate_zone_patterns.png" alt="Climate Analysis">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">1. Climate Analysis & Seasonality Trajectories</h3>
+            <p class="card-text">Studied macro climate zones (Tropical, Subtropical, Temperate, Subpolar, Polar). Demonstrates that while Tropical zones maintain nearly constant temperatures (~26°C), Polar and Subpolar regions exhibit massive annual swings exceeding 40°C.</p>
+          </div>
+        </div>
+
+        <!-- 2. Environmental Impact -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/environmental_air_quality_correlations.png" alt="Environmental Impact">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2. Environmental Impact: Air Quality vs Weather</h3>
+            <p class="card-text">Analyzed particulate matter (PM2.5, PM10) and gases (O3, NO2, SO2, CO). Proved strong pollutant dispersion by wind speed (negative correlation) and confirmed photochemical ozone generation in high-temperature conditions.</p>
+          </div>
+        </div>
+
+        <!-- 3. Feature Importance -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/feature_importance_comparison.png" alt="Feature Importance">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">3. Multi-Technique Feature Importance</h3>
+            <p class="card-text">Compared Random Forest Gini MDI against test-set Permutation Importance. Top drivers of next-day temperature include 1-day lag, 7-day rolling mean, latitude coordinate, and cyclical day-of-year solar calendar angles.</p>
+          </div>
+        </div>
+
+        <!-- 4. Spatial Analysis -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/spatial_latitude_gradient.png" alt="Spatial Analysis">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">4. Spatial Analysis: Latitudinal Lapse Rate</h3>
+            <p class="card-text">Modeled the equator-to-pole temperature gradient, confirming a quadratic relationship peaking near 10°N and declining at ~0.5°C per degree latitude. Highlighted the exact hemispheric seasonal phase inversion.</p>
+          </div>
+        </div>
+
+        <!-- 5. Geographical Patterns -->
+        <div class="card" style="grid-column: 1 / -1;">
+          <div class="card-img-wrap">
+            <img src="../outputs/figures/geographical_continental_patterns.png" alt="Geographical Patterns">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">5. Geographical Patterns & Country Extremes</h3>
+            <p class="card-text">Ranked continental temperature profiles and established global leaderboards for the top 10 hottest countries (led by Djibouti, Mali, Sudan), coldest countries (Greenland, Canada, Russia), and highest PM2.5 pollution levels.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: INSIGHTS & PM TAKEAWAYS -->
+    <section class="section" id="insights">
+      <div class="section-header">
+        <span class="section-tag">Step 6: Executive Takeaways</span>
+        <h2 class="section-title">Strategic Insights & Product Recommendations</h2>
+        <p class="section-desc">Translating advanced data science findings into actionable product, business, and operational opportunities.</p>
+      </div>
+
+      <div class="visual-grid">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">1. Smart Energy Grid & HVAC Load Optimization</h3>
+            <p class="card-text">With a 1.48°C MAE next-day forecasting model, utilities and smart building management systems can pre-cool or pre-heat infrastructure during off-peak hours, reducing peak grid stress and energy costs by 12-18%.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">2. Proactive Air Quality & Health Alerts</h3>
+            <p class="card-text">By coupling meteorological forecasts (wind speed and humidity) with air pollutant dynamics, municipal health apps can forecast hazardous smog episodes 24-48 hours in advance, protecting vulnerable populations.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">3. Extreme Weather Event Insurance & AgTech</h3>
+            <p class="card-text">The multi-method anomaly detection framework (Isolation Forest + domain thresholds) enables automated parametric insurance payouts and early warnings for agricultural frost damage and flash flooding.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">4. Supply Chain & Fleet Logistics Routing</h3>
+            <p class="card-text">Dynamic wind and precipitation forecasting integrated into route optimization engines reduces fuel consumption and minimizes weather-related shipping delays across global trade corridors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Weather Trend Forecasting Project | Developed for <strong>PM Accelerator Tech Assessment</strong><br>
+      GitHub Repository: <a href="https://github.com/Umar-kh05/Weather-Trend-Forecasting.git" target="_blank">github.com/Umar-kh05/Weather-Trend-Forecasting</a>
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

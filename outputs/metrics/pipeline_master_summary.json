@@ -1,0 +1,82 @@
+{
+  "pm_accelerator_mission": "The Product Manager Accelerator (PMA), founded by Dr. Nancy Li, is on a mission to help ambitious professionals uncover their potential, gain the confidence to land product manager and AI product manager roles at leading tech companies and startup unicorns, and accelerate their career growth through world-class coaching, training, and community.",
+  "pma_kids_mission": "PMA Kids: Spark curiosity, build foundational skills, and foster a passion for technology and AI in the next generation by providing free AI bootcamp training to teenagers from underserved communities.",
+  "dataset_metadata": {
+    "total_rows": 98604,
+    "total_columns": 41,
+    "memory_usage_mb": 40.74,
+    "unique_countries": 211,
+    "unique_locations": 254,
+    "date_min": "2024-05-16 01:45",
+    "date_max": "2025-10-05 19:30",
+    "null_count": 0
+  },
+  "anomaly_detection": {
+    "total_records": 98604,
+    "iso_forest_anomalies": 1973,
+    "iso_forest_anomaly_pct": 2.0,
+    "extreme_heat_days": 1281,
+    "extreme_cold_days": 175,
+    "extreme_precip_days": 181,
+    "extreme_wind_days": 1006,
+    "hazardous_air_days": 1439,
+    "any_extreme_event_days": 3947
+  },
+  "model_benchmarks": [
+    {
+      "model_name": "Ensemble Forecaster (Meta-Blend)",
+      "MAE": 1.4853,
+      "RMSE": 2.0669,
+      "R2": 0.9137,
+      "MAPE(%)": 7.79,
+      "Max_Error": 14.5249
+    },
+    {
+      "model_name": "Gradient Boosting Regressor",
+      "MAE": 1.4869,
+      "RMSE": 2.0702,
+      "R2": 0.9134,
+      "MAPE(%)": 7.83,
+      "Max_Error": 14.333
+    },
+    {
+      "model_name": "Random Forest Regressor",
+      "MAE": 1.5206,
+      "RMSE": 2.1255,
+      "R2": 0.9087,
+      "MAPE(%)": 8.07,
+      "Max_Error": 15.9344
+    },
+    {
+      "model_name": "Ridge Regression",
+      "MAE": 1.5343,
+      "RMSE": 2.1452,
+      "R2": 0.907,
+      "MAPE(%)": 8.07,
+      "Max_Error": 17.242
+    },
+    {
+      "model_name": "Deep Learning (PyTorch MLP)",
+      "MAE": 1.5903,
+      "RMSE": 2.1663,
+      "R2": 0.9052,
+      "MAPE(%)": 8.13,
+      "Max_Error": 15.5254
+    },
+    {
+      "model_name": "Persistence Baseline (Lag-1)",
+      "MAE": 1.6408,
+      "RMSE": 2.3443,
+      "R2": 0.889,
+      "MAPE(%)": 8.41,
+      "Max_Error": 18.8
+    }
+  ],
+  "meta_ensemble_weights": {
+    "Ridge Regression": 0.0,
+    "Random Forest Regressor": 0.098,
+    "Gradient Boosting Regressor": 0.7796,
+    "Deep Learning (PyTorch MLP)": 0.1224
+  },
+  "execution_time_seconds": 160.85
+}
